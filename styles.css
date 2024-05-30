@@ -161,8 +161,8 @@ button {
 }
 
 .dettext{
-    background:linear-gradient(to right,rgb(230, 227, 230),rgb(230, 227, 230) 80%, rgb(0, 0, 0) 90%);
-  -webkit-background-clip: text;
+  background:linear-gradient(to right,rgb(230, 227, 230),rgb(230, 227, 230) 80%, rgb(0, 0, 0) 90%);
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 12px;
 
@@ -210,4 +210,8 @@ textarea::-webkit-scrollbar-thumb {
     padding-left: 10px;
     padding-right: 10px;
     align-items: center;
+}
+
+.ofandcls{
+    display: flex;
 }
