@@ -1,7 +1,12 @@
 wordcount=document.getElementsByClassName("wordcount")
 addbtn=document.getElementById("addbtn")
-btncover=document.querySelector(".openedfile")
+openedfile=document.querySelector(".openedfile")
+btncover=document.querySelectorAll(".btncover")
+fname=document.querySelectorAll(".fname")
 
+
+
+lastactivefile=null
 
 ta=document.querySelector(".ta")
 
@@ -15,8 +20,36 @@ function addLab(){
     close.classList.toggle("close")
     btndiv.appendChild(name)
     btndiv.appendChild(close)
-    btncover.appendChild(btndiv)
+    openedfile.appendChild(btndiv)
 }
+
+fname.forEach(element => {
+    element.addEventListener("click",function(e){ 
+        const clickedbutton=e.target.parentElement
+        if (clickedbutton.classList.contains("btncover")) {
+            if(lastactivefile){
+                lastactivefile.classList.remove("activefile");
+            }
+        }
+        e.target.parentElement.classList.add("activefile")
+        lastactivefile=clickedbutton
+        // console.log(lastactivefile)
+    },false);
+});
+
+btncover.forEach(element => {
+    element.addEventListener("click",function(e){ 
+        const clickedbutton=e.target
+        if (clickedbutton.classList.contains("btncover")) {
+            if(lastactivefile){
+                lastactivefile.classList.remove("activefile");
+            }
+            e.target.classList.add("activefile")
+            lastactivefile=clickedbutton
+        }
+        // console.log(lastactivefile)
+    },false);
+});
 
 ta.addEventListener("keyup", function(){
     let con=ta.value

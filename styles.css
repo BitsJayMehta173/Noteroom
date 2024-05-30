@@ -53,8 +53,8 @@ button {
 }
 
 .btncover{
-    display: flex;
-    justify-content: space-between;
+
+    /* justify-content: space-between; */
     /* background-color: #58135e00; */
    background-color: #c457c652;
 
@@ -74,7 +74,7 @@ button {
 .add{
     /* background-color: #58135e00; */
    background-color: #00000098;
-
+    left: auto;
     margin-left: 15px;
     border-radius: 30px;
     width: fit-content;
@@ -103,12 +103,19 @@ button {
 
 .openedfile{
     display: flex;
-    /* overflow: scroll; */
+    overflow: scroll;
+    /* max-width needs to fixed for the side bar minimizing as we created more than the required files */
+    max-width: 95%; 
 }
+.openedfile::-webkit-scrollbar {
+    display: none;
+  }
 
 .close{
     color: #B4B4B4;
     border-radius: 100%;
+    float: right;
+    margin-right: 6px;
 }
 
 .close:hover{
