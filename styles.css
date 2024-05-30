@@ -202,10 +202,12 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .otherprops{
+    display: flex;
     background-color: #000000ac;
     height: 5%;
     border-radius: 8px;
     color: rgb(201, 201, 201);
     padding-left: 10px;
     padding-right: 10px;
+    align-items: center;
 }
