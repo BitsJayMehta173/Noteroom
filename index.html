@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title>NoteRoom</title>
 </head>
 <body>
     <div class="sidebar">
@@ -42,31 +42,30 @@
     </div>
 
     <div class="content">
+        <div class="ofandcls">
         <div class="openedfile">
             <div class="btncover activefile">
-                <button>Life<button class="close">X</button></button>
+                <button class="fname">Life<button class="close">X</button></button>
             </div>
 
             <div class="btncover">
-                <button>Life<button class="close">X</button></button>
+                <button class="fname">Life<button class="close">X</button></button>
             </div>
-
             <div class="btncover">
-                <button>Life<button class="close">X</button></button>
+                <button class="fname">Life<button class="close">X</button></button>
             </div>
-
             <div class="btncover">
-                <button>Life<button class="close">X</button></button>
+                <button class="fname">Life<button class="close">X</button></button>
             </div>
-
             <div class="btncover">
-                <button>Life<button class="close">X</button></button>
+                <button class="fname">Life<button class="close">X</button></button>
             </div>
-            <div class="add">
-                <button>+</button>
-            </div>
-
+            
         </div>
+        <div class="add">
+            <button id="addbtn" onclick="addLab()">+</button>
+        </div>
+    </div>
         <div class="textbox">
             <textarea class="ta" autofocus></textarea>
         </div>

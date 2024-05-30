@@ -53,8 +53,8 @@ button {
 }
 
 .btncover{
-    display: flex;
-    justify-content: space-between;
+
+    /* justify-content: space-between; */
     /* background-color: #58135e00; */
    background-color: #c457c652;
 
@@ -74,7 +74,7 @@ button {
 .add{
     /* background-color: #58135e00; */
    background-color: #00000098;
-
+    left: auto;
     margin-left: 15px;
     border-radius: 30px;
     width: fit-content;
@@ -103,12 +103,19 @@ button {
 
 .openedfile{
     display: flex;
-    /* overflow: scroll; */
+    overflow: scroll;
+    /* max-width needs to fixed for the side bar minimizing as we created more than the required files */
+    max-width: 95%; 
 }
+.openedfile::-webkit-scrollbar {
+    display: none;
+  }
 
 .close{
     color: #B4B4B4;
     border-radius: 100%;
+    float: right;
+    margin-right: 6px;
 }
 
 .close:hover{
@@ -161,8 +168,8 @@ button {
 }
 
 .dettext{
-    background:linear-gradient(to right,rgb(230, 227, 230),rgb(230, 227, 230) 80%, rgb(0, 0, 0) 90%);
-  -webkit-background-clip: text;
+  background:linear-gradient(to right,rgb(230, 227, 230),rgb(230, 227, 230) 80%, rgb(0, 0, 0) 90%);
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 12px;
 
@@ -202,10 +209,16 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .otherprops{
+    display: flex;
     background-color: #000000ac;
     height: 5%;
     border-radius: 8px;
     color: rgb(201, 201, 201);
     padding-left: 10px;
     padding-right: 10px;
+    align-items: center;
+}
+
+.ofandcls{
+    display: flex;
 }
