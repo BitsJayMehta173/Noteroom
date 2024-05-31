@@ -5,15 +5,25 @@ btncover=document.querySelectorAll(".btncover")
 fname=document.querySelectorAll(".fname")
 close=document.querySelectorAll(".close")
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('http://localhost:3000/getUsers')
+contents=[]
+
+async function load (){
+    await document.addEventListener('DOMContentLoaded', () => {
+     fetch('http://localhost:3000/getUsers')
         .then(response => response.json())
         .then(data => {
             console.log(data)
+
+            data.forEach(val=>{
+                contents.push(val["name"])
+            })
+
         })
         .catch(error => console.log('Error fetching data:'));
-});
-
+    });
+}
+    
+load()
 
 lastactivefile=null
 ta=document.querySelector(".ta")
