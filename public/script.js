@@ -5,6 +5,14 @@ btncover=document.querySelectorAll(".btncover")
 fname=document.querySelectorAll(".fname")
 close=document.querySelectorAll(".close")
 
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('http://localhost:3000/getUsers')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(error => console.log('Error fetching data:'));
+});
 
 
 lastactivefile=null
