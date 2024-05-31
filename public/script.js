@@ -30,7 +30,7 @@ async function load (){
         .catch(error => console.log('Error fetching data:'));
     };
     
-
+let c=0
 
 lastactivefile=null
 ta=document.querySelector(".ta")
@@ -66,17 +66,43 @@ function highlight(){
     btncover=document.querySelectorAll(".btncover")
 
     fname=document.querySelectorAll(".fname")
+
+    close=document.querySelectorAll(".close")
+
+    close.forEach(element => {
+        element.addEventListener("click",function(e){ 
+            contents.forEach(ele=>{
+            idstore=document.querySelector(".idstore")
+            
+                if(idstore.textContent!="" && idstore.textContent==e.target.parentElement.getAttribute('id')){
+                    ta.value=""
+                    idstore.textContent=""
+                    ta=document.querySelector(".ta")
+                    ta.style.display="none"
+                }
+            })
+
+            e.target.parentElement.remove();
+            // ta.style.display="none"
+
+        },false);
+    });
+
+    // after close the active file we must shift the activefile to newactive file if the current window is closed for this we have to create a stack for new window popup too
+
     fname.forEach(element => {
         element.addEventListener("click",function(e){ 
-            ta.style.display="block"
-
+           
+            
             const clickedbutton=e.target.parentElement
+            ta.style.display="block"
             
             if (clickedbutton.classList.contains("btncover")) {
                 if(lastactivefile){
                     lastactivefile.classList.remove("activefile");
                 }
             }
+            
             e.target.parentElement.classList.add("activefile")
             currentfile=1;
             lastactivefile=clickedbutton
@@ -101,8 +127,9 @@ function highlight(){
     });
     
     btncover.forEach(element => {
-        element.addEventListener("click",function(e){ 
-            ta.style.display="block"
+        element.addEventListener("click",function(e){
+            if(!e.target.classList.contains("close")) 
+                ta.style.display="block"
             const clickedbutton=e.target
             if (clickedbutton.classList.contains("btncover")) {
                 if(lastactivefile){
@@ -126,25 +153,7 @@ function highlight(){
         },false);
     });
 
-    close=document.querySelectorAll(".close")
-
-    close.forEach(element => {
-        element.addEventListener("click",function(e){ 
-            contents.forEach(ele=>{
-            idstore=document.querySelector(".idstore")
-
-                if(idstore.textContent!="" && idstore.textContent==e.target.parentElement.getAttribute('id')){
-                    ta.value=""
-                    idstore.textContent=""
-                    ta.style.display="none"
-                }
-            })
-
-            e.target.parentElement.remove();
-        },false);
-    });
-
-    // after close the active file we must shift the activefile to newactive file if the current window is closed for this we have to create a stack for new window popup too
+  
 
 }
 
@@ -164,7 +173,15 @@ async function nfnsubmitfun(){
                 body: JSON.stringify(data)
             })
             .then(response => response.json())
-            .then(data => console.log('Success:', data))
+            .then(data => {console.log('Success:', data)
+                let myobj={
+                    id: data["receivedData"]["_id"],
+                    title: data["receivedData"]["title"],
+                    content:data["receivedData"]["content"]
+                }
+                contents.push(myobj)
+                console.log(contents)
+            })
             .catch(error => console.error('Error:', error));
 
 
