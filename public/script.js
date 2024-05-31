@@ -7,26 +7,52 @@ close=document.querySelectorAll(".close")
 
 contents=[]
 
+// for now we have left DOMLOADED function but we can change it later for the required components to load first then fetch data later
 async function load (){
-    await document.addEventListener('DOMContentLoaded', () => {
-     fetch('http://localhost:3000/getUsers')
+    await fetch('http://localhost:3000/getUsers')
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
 
             data.forEach(val=>{
-                contents.push(val["name"])
+                let myobj={
+                    name: val["name"],
+                    age:val["age"]
+                }
+                contents.push(myobj)
             })
 
         })
         .catch(error => console.log('Error fetching data:'));
-    });
-}
+    };
     
-load()
+
 
 lastactivefile=null
 ta=document.querySelector(".ta")
+
+
+function fileload(){
+    load().then(()=>{
+        // console.log(contents)
+        contents.forEach(element =>{
+        let btndiv=document.createElement("div")
+        btndiv.classList.toggle("btncover")
+        let name=document.createElement("button")
+        name.classList.toggle("fname")
+        let close=document.createElement("button")
+        name.innerHTML=element["name"]
+        // ta.value=element["age"]
+        close.innerHTML="X"
+        close.classList.toggle("close")
+        btndiv.appendChild(name)
+        btndiv.appendChild(close)
+        openedfile.appendChild(btndiv)
+        highlight()
+    })})
+}
+
+fileload()
 
 function highlight(){
 
@@ -44,6 +70,8 @@ function highlight(){
             }
             e.target.parentElement.classList.add("activefile")
             lastactivefile=clickedbutton
+            // for the text area change we have to create a unique id map for the corresponding file name and textarea
+            // console.log(e.target.innerHTML)
         },false);
     });
     
