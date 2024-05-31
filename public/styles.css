@@ -12,6 +12,24 @@ body{
     overflow: hidden;
 }
 
+.newfiledialogue{
+    position: absolute;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.56);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.detailsbox{
+    display: flex;
+    background-color: #dedede;
+    padding: 160px;
+    border-radius: 28px;
+
+}
 .sidebar{
     height: 100vh;
     background-color: #58135E;
@@ -178,6 +196,7 @@ button {
 }
 
 textarea{
+    display: none;
     height: 90%;
     width: 99.65%;
     background-color: #ffffff00;
@@ -221,4 +240,9 @@ textarea::-webkit-scrollbar-thumb {
 
 .ofandcls{
     display: flex;
+}
+
+.idstore{
+    display: none;
+    /* margin-left: 50px; */
 }
