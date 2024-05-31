@@ -8,14 +8,13 @@ close=document.querySelectorAll(".close")
 
 
 lastactivefile=null
-
 ta=document.querySelector(".ta")
-
-
 
 function highlight(){
 
     // seperated into two function taking a lot of time and lines of code merge it or find a alternative solution
+    btncover=document.querySelectorAll(".btncover")
+
     fname=document.querySelectorAll(".fname")
     fname.forEach(element => {
         element.addEventListener("click",function(e){ 
