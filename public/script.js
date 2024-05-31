@@ -181,25 +181,32 @@ async function nfnsubmitfun(){
                 }
                 contents.push(myobj)
                 console.log(contents)
+
+                console.log(nfn.value)
+                let btndiv=document.createElement("div")
+                btndiv.classList.toggle("btncover")
+                btndiv.setAttribute('id', data["receivedData"]["_id"]);
+                let name=document.createElement("button")
+                name.classList.toggle("fname")
+                let close=document.createElement("button")
+                name.innerHTML=nfn.value
+                nfn.value=""
+                close.innerHTML="X"
+                close.classList.toggle("close")
+                btndiv.appendChild(name)
+                btndiv.appendChild(close)
+                openedfile.appendChild(btndiv)
+                newfiledialogue.style.display="none"
+                highlight()
+                idstore=document.querySelector(".idstore")
+                idstore.textContent=data["receivedData"]["_id"]
+
+
             })
             .catch(error => console.error('Error:', error));
 
 
-    console.log(nfn.value)
-    let btndiv=document.createElement("div")
-    btndiv.classList.toggle("btncover")
-    let name=document.createElement("button")
-    name.classList.toggle("fname")
-    let close=document.createElement("button")
-    name.innerHTML=nfn.value
-    nfn.value=""
-    close.innerHTML="X"
-    close.classList.toggle("close")
-    btndiv.appendChild(name)
-    btndiv.appendChild(close)
-    openedfile.appendChild(btndiv)
-    newfiledialogue.style.display="none"
-    highlight()
+    
 }
 
 

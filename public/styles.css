@@ -243,6 +243,6 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .idstore{
-    display: none;
+    /* display: none; */
     /* margin-left: 50px; */
 }
