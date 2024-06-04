@@ -10,7 +10,7 @@ close=document.querySelectorAll(".close")
 lastactivefile=null
 ta=document.querySelector(".ta")
 
-ta.value=".....Sunflower....
+ta.value=`.....Sunflower....
 
 a small hand pasees,
 running in those crowds of sunflower,
@@ -60,7 +60,7 @@ dad steps foreward with a silent expression
 and sits in front of the gravestone.
 come sit here.
 and give it to your mom.....
-places the sunfllower over the gravestone...."
+places the sunfllower over the gravestone....`
 
 function highlight(){
 
