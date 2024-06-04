@@ -64,6 +64,7 @@ places the sunfllower over the gravestone....`
 
 ta.focus();
 ta.setSelectionRange(0, 0);
+ta.scrollTop = 0;
 
 function highlight(){
 
