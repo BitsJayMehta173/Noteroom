@@ -62,6 +62,9 @@ come sit here.
 and give it to your mom.....
 places the sunfllower over the gravestone....`
 
+ta.focus();
+ta.setSelectionRange(0, 0);
+
 function highlight(){
 
     // seperated into two function taking a lot of time and lines of code merge it or find a alternative solution
