@@ -80,6 +80,9 @@ function highlight(){
                     idstore.textContent=""
                     ta=document.querySelector(".ta")
                     ta.style.display="none"
+                    if(document.querySelector(".contdetails")){
+                        document.querySelector(".contdetails").remove()
+                    }
                 }
             })
 
@@ -173,6 +176,26 @@ function highlight(){
                     ta.value=ele["content"]
                     // console.log(ele["id"])
                     idstore.textContent=ele["id"]
+
+                    if(document.querySelector(".contdetails")){
+                        document.querySelector(".contdetails").remove()
+                    }
+                        let detbox=document.querySelector(".detbox")
+                        let contdetails=document.createElement("div")
+                        contdetails.classList.toggle("contdetails")
+                        // btndiv.setAttribute('id', data["receivedData"]["_id"]);
+                        let timestamp=document.createElement("div")
+                        timestamp.classList.toggle("timestamp")
+                        let det=document.createElement("div")
+                        det.classList.toggle("det")
+                        let dettext=document.createElement("span")
+                        dettext.textContent=ele["description"]
+                        timestamp.innerHTML="Today"
+                        det.classList.toggle("active")
+                        contdetails.appendChild(timestamp)
+                        det.appendChild(dettext)
+                        contdetails.appendChild(det)
+                        detbox.appendChild(contdetails)
                 }
             })
         },false);
