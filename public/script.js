@@ -40,7 +40,6 @@ ta=document.querySelector(".ta")
 
 function fileload(){
     load().then(()=>{
-        console.log(contents)
         contents.forEach(element =>{
         let btndiv=document.createElement("div")
         btndiv.setAttribute('id', element["id"]);
@@ -115,15 +114,15 @@ function highlight(){
             
             
             let idstore=document.querySelector(".idstore")
-
+            
             contents.forEach(ele=>{
-                console.log("a")
+               
                 if(ele["id"]==e.target.parentElement.getAttribute('id')){
                     ta.value=ele["content"]
                     // if we need to perform any action on the present note we can use idstore textcontent to save it in the db as it has its id
                     idstore.textContent=ele["id"]
 
-                    console.log(ele["id"])
+                    // console.log(ele["id"])
                     
                     if(document.querySelector(".contdetails")){
                         document.querySelector(".contdetails").remove()
@@ -169,10 +168,10 @@ function highlight(){
             idstore=document.querySelector(".idstore")
 
             contents.forEach(ele=>{
-                console.log("a")
+                // console.log("a")
                 if(ele["id"]==e.target.getAttribute('id')){
                     ta.value=ele["content"]
-                    console.log(ele["id"])
+                    // console.log(ele["id"])
                     idstore.textContent=ele["id"]
                 }
             })
@@ -187,6 +186,7 @@ highlight()
 
 async function nfnsubmitfun(){
     nfn=document.querySelector(".nfn")
+    // talking about the description this is draft we need to make a object which stores date,time,title and other descriptions in each update. 
     const data = {
         title: nfn.value,
         content: '',
@@ -208,9 +208,9 @@ async function nfnsubmitfun(){
                     description:data["receivedData"]["description"]
                 }
                 contents.push(myobj)
-                console.log(contents)
+                // console.log(contents)
 
-                console.log(nfn.value)
+                // console.log(nfn.value)
                 let btndiv=document.createElement("div")
                 btndiv.classList.toggle("btncover")
                 btndiv.setAttribute('id', data["receivedData"]["_id"]);
@@ -269,7 +269,14 @@ ta.addEventListener("keyup", async function(){
         body: JSON.stringify(updateData)
     })
     .then(response => response.json())
-    .then(data => console.log('Update Success:', data))
+    .then(data => {console.log('Update Success:', data)
+        contents.forEach(ele=>{
+            nobj=data["updatedData"]
+            if(nobj["_id"]==ele["id"]){
+                ele["content"]=data["updatedData"]["content"]
+            }
+        })
+    })
     .catch(error => console.error('Update Error:', error));
 
 });
