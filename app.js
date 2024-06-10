@@ -39,6 +39,7 @@ app.listen(3000,()=>{
 const userSchema=new mongoose.Schema({
     title:String,
     content:String,
+    description:String,
 });
 // --------------------------
 

@@ -7,6 +7,7 @@ close=document.querySelectorAll(".close")
 newfiledialogue=document.querySelector(".newfiledialogue")
 
 
+
 contents=[]
 
 currentfile=null
@@ -21,7 +22,8 @@ async function load (){
                 let myobj={
                     id: val["_id"],
                     title: val["title"],
-                    content:val["content"]
+                    content:val["content"],
+                    description:val["description"]
                 }
                 contents.push(myobj)
             })
@@ -109,6 +111,8 @@ function highlight(){
             // for the text area change we have to create a unique id map for the corresponding file name and textarea
             // console.log(e.target.innerHTML)
             ta=document.querySelector(".ta")
+
+            
             
             let idstore=document.querySelector(".idstore")
 
@@ -120,6 +124,28 @@ function highlight(){
                     idstore.textContent=ele["id"]
 
                     console.log(ele["id"])
+                    
+                    if(document.querySelector(".contdetails")){
+                        document.querySelector(".contdetails").remove()
+                    }
+                        let detbox=document.querySelector(".detbox")
+                        let contdetails=document.createElement("div")
+                        contdetails.classList.toggle("contdetails")
+                        // btndiv.setAttribute('id', data["receivedData"]["_id"]);
+                        let timestamp=document.createElement("div")
+                        timestamp.classList.toggle("timestamp")
+                        let det=document.createElement("div")
+                        det.classList.toggle("det")
+                        let dettext=document.createElement("span")
+                        dettext.textContent=ele["description"]
+                        timestamp.innerHTML="Today"
+                        det.classList.toggle("active")
+                        contdetails.appendChild(timestamp)
+                        det.appendChild(dettext)
+                        contdetails.appendChild(det)
+                        detbox.appendChild(contdetails)
+
+
                 }
             })
 
@@ -164,6 +190,7 @@ async function nfnsubmitfun(){
     const data = {
         title: nfn.value,
         content: '',
+        description:nfn.value,
     };
     await fetch('http://localhost:3000/getUsers', {
                 method: 'POST',
@@ -177,7 +204,8 @@ async function nfnsubmitfun(){
                 let myobj={
                     id: data["receivedData"]["_id"],
                     title: data["receivedData"]["title"],
-                    content:data["receivedData"]["content"]
+                    content:data["receivedData"]["content"],
+                    description:data["receivedData"]["description"]
                 }
                 contents.push(myobj)
                 console.log(contents)
