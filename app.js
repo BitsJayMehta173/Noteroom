@@ -11,14 +11,21 @@ app.use(cors());
 
 // MONGODB CONNECTION
 
-const MONGOURL="mongodb://localhost:27017/noteroom";
+// const MONGOURL="mongodb://localhost:27017/noteroom";
+const MONGOURL="mongodb+srv://jaymehta20020605:QZd2AE2qkqIr5fJy@noteroom.4stjbxv.mongodb.net/?retryWrites=true&w=majority&appName=noteroom"
 
-mongoose.connect(MONGOURL).then(()=>{
-    console.log("DB Connection succesfull");
+// mongoose.connect(MONGOURL).then(()=>{
+//     console.log("DB Connection succesfull");
 
 
-})
-.catch((error)=>console.log(error));
+// })
+// .catch((error)=>console.log(error));
+
+mongoose.connect(MONGOURL).then(() => {
+    console.log('Connected to MongoDB Atlas');
+  }).catch(err => {
+    console.error('Failed to connect to MongoDB Atlas', err);
+  });
 
 //  ---------------------- //
 
@@ -40,7 +47,7 @@ const userSchema=new mongoose.Schema({
     title:String,
     content:String,
     description:String,
-});
+},{ collection: 'notes' });
 // --------------------------
 
 // users is the table name, userSchema is description refrencing the table data structure

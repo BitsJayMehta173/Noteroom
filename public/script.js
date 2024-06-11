@@ -13,7 +13,7 @@ let started=0
 currentfile=null
 // for now we have left DOMLOADED function but we can change it later for the required components to load first then fetch data later
 async function load (){
-    await fetch('http://localhost:3000/getUsers')
+    await fetch('/getUsers')
         .then(response => response.json())
         .then(data => {
             // console.log(data)
@@ -311,7 +311,7 @@ function highlight(){
 }
 
 function deleteData(id) {
-    fetch(`http://localhost:3000/getUsers/${id}`, {
+    fetch(`/getUsers/${id}`, {
         method: 'DELETE'
     })
     .then(response => response.json())
@@ -334,7 +334,7 @@ async function nfnsubmitfun(){
         content: '',
         description:nfn.value,
     };
-    await fetch('http://localhost:3000/getUsers', {
+    await fetch('/getUsers', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -422,7 +422,7 @@ ta.addEventListener("keyup", async function(){
     const id = idstore.textContent;
 
     // Send PUT request
-    await fetch(`http://localhost:3000/getUsers/${id}`, {
+    await fetch(`/getUsers/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
