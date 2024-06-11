@@ -236,6 +236,12 @@ function highlight(){
                 }
             })
             ta.focus()
+            let wordcount=document.querySelector(".wordcount")
+            let number=wc(ta.value)
+            wordcount.textContent="WordCount: "+number
+            if(ta.style.display=="none"){
+            wordcount.textContent="No file Opened"
+            }
 
         },false);
     });
@@ -331,9 +337,13 @@ function addLab(){
 
 ta.addEventListener("keyup", async function(){
 
-    let con=ta.value
+    // let con=ta.value
     //need to make a function to remove space and next line count
-    wordcount[0].textContent="WordCount: "+con.length
+    // wordcount[0].textContent="WordCount: "+con.length
+    let ta=document.querySelector(".ta")
+    let wordcount=document.querySelector(".wordcount")
+    let number=wc(ta.value)
+    wordcount.textContent="WordCount: "+number
     
     // Data to be updated
     const updateData = {
@@ -366,3 +376,15 @@ ta.addEventListener("keyup", async function(){
 
 });
 
+function wc(words){
+    let len=0;
+    words=words.split()
+    // console.log(words)
+    for(let i=0;i<words[0].length;i++){
+        if(words[0][i]!=" " && words[0][i]!='\n'){
+            len=len+1;
+        }
+    }
+    // console.log(len)
+    return len;
+}
