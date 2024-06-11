@@ -40,6 +40,7 @@ ta=document.querySelector(".ta")
 
 function fileload(){
     load().then(()=>{
+        let idx=0
         contents.forEach(element =>{
         let btndiv=document.createElement("div")
         btndiv.setAttribute('id', element["id"]);
@@ -56,6 +57,25 @@ function fileload(){
         openedfile.appendChild(btndiv)
         
         highlight()
+        let detbox=document.querySelector(".detbox")
+                        let contdetails=document.createElement("div")
+                        contdetails.classList.toggle("contdetails")
+                        // btndiv.setAttribute('id', data["receivedData"]["_id"]);
+                        let timestamp=document.createElement("div")
+                        timestamp.classList.toggle("timestamp")
+                        let det=document.createElement("div")
+                        det.classList.toggle("det")
+                        let dettext=document.createElement("span")
+                        dettext.classList.toggle("dettext")
+                        dettext.textContent=element["title"]
+                        timestamp.innerHTML="Today"
+                        if(idx==0){
+                        det.classList.toggle("active")
+                        idx+=1}
+                        contdetails.appendChild(timestamp)
+                        det.appendChild(dettext)
+                        contdetails.appendChild(det)
+                        detbox.appendChild(contdetails)
     })})
 }
 
