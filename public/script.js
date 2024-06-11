@@ -7,9 +7,9 @@ close=document.querySelectorAll(".close")
 newfiledialogue=document.querySelector(".newfiledialogue")
 
 
-
+let abtnpress=0
 contents=[]
-
+let started=0
 currentfile=null
 // for now we have left DOMLOADED function but we can change it later for the required components to load first then fetch data later
 async function load (){
@@ -92,17 +92,20 @@ function highlight(){
 
     close.forEach(element => {
         element.addEventListener("click",function(e){ 
+            let idx=0;
+            let testing=0;
             contents.forEach(ele=>{
             idstore=document.querySelector(".idstore")
-            
-                if(idstore.textContent!="" && idstore.textContent==e.target.parentElement.getAttribute('id')){
+                if(idstore.textContent!="" && idstore.textContent==e.target.parentElement.getAttribute('id')){  testing=1;
                     ta.value=""
                     idstore.textContent=""
                     ta=document.querySelector(".ta")
                     ta.style.display="none"
-                    if(document.querySelector(".contdetails")){
-                        document.querySelector(".contdetails").remove()
-                    }
+                    // if(document.querySelector(".contdetails")){
+                    //     document.querySelectorAll(".contdetails").forEach(e=>{
+                    //         e.remove()
+                    //     })
+                    // }
                     if(document.querySelector(".deletefile")){
                         document.querySelector(".deletefile").remove()
                     }
@@ -111,6 +114,34 @@ function highlight(){
 
             e.target.parentElement.remove();
             // ta.style.display="none"
+            if(testing==1){
+                if(document.querySelector(".contdetails")){
+                    document.querySelectorAll(".contdetails").forEach(e=>{
+                        e.remove()
+                    })
+                }
+            contents.forEach((cele)=>{
+                let detbox=document.querySelector(".detbox")
+                        let contdetails=document.createElement("div")
+                        contdetails.classList.toggle("contdetails")
+                        // btndiv.setAttribute('id', data["receivedData"]["_id"]);
+                        let timestamp=document.createElement("div")
+                        timestamp.classList.toggle("timestamp")
+                        let det=document.createElement("div")
+                        det.classList.toggle("det")
+                        let dettext=document.createElement("span")
+                        dettext.classList.toggle("dettext")
+                        dettext.textContent=cele["title"]
+                        timestamp.innerHTML="Today"
+                        if(idx==0){
+                        det.classList.toggle("active")
+                        idx+=1}
+                        contdetails.appendChild(timestamp)
+                        det.appendChild(dettext)
+                        contdetails.appendChild(det)
+                        detbox.appendChild(contdetails)
+                    })
+                }
 
         },false);
     });
@@ -120,6 +151,7 @@ function highlight(){
     fname.forEach(element => {
         element.addEventListener("click",function(e){ 
            
+            started=1
             
             const clickedbutton=e.target.parentElement
             ta.style.display="block"
@@ -151,7 +183,9 @@ function highlight(){
                     // console.log(ele["id"])
                     
                     if(document.querySelector(".contdetails")){
-                        document.querySelector(".contdetails").remove()
+                        document.querySelectorAll(".contdetails").forEach(e=>{
+                            e.remove()
+                        })
                     }
                     if(document.querySelector(".deletefile")){
                         document.querySelector(".deletefile").remove()
@@ -195,6 +229,7 @@ function highlight(){
     
     btncover.forEach(element => {
         element.addEventListener("click",function(e){
+            started=1
             if(!e.target.classList.contains("close")) 
                 ta.style.display="block"
             const clickedbutton=e.target
@@ -217,7 +252,12 @@ function highlight(){
                     idstore.textContent=ele["id"]
 
                     if(document.querySelector(".contdetails")){
-                        document.querySelector(".contdetails").remove()
+                        document.querySelectorAll(".contdetails").forEach(e=>{
+                            e.remove()
+                        })
+                    }
+                    if(abtnpress==1){
+                        abtnpress=0     
                     }
                     if(document.querySelector(".deletefile")){
                         document.querySelector(".deletefile").remove()
@@ -327,6 +367,7 @@ async function nfnsubmitfun(){
                 btndiv.appendChild(close)
                 openedfile.appendChild(btndiv)
                 newfiledialogue.style.display="none"
+                abtnpress=1
                 highlight()
                 // idstore=document.querySelector(".idstore")
                 // idstore.textContent=data["receivedData"]["_id"]
@@ -340,6 +381,11 @@ async function nfnsubmitfun(){
                 } else {
                 console.log('No elements found');
                 }
+                // if(document.querySelector(".contdetails")){
+                //         document.querySelectorAll(".contdetails").forEach(e=>{
+                //             e.remove()
+                //         })
+                //     }
 
             })
             .catch(error => console.error('Error:', error));
