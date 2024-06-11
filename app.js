@@ -97,3 +97,18 @@ app.put('/getUsers/:id', (req, res) => {
             res.status(500).json({ error: 'An error occurred' });
         });
 });
+
+app.delete('/getUsers/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+      const result = await UserModel.findByIdAndDelete(id);
+      if (result) {
+        res.status(200).send({ message: 'Document deleted successfully' });
+      } else {
+        res.status(404).send({ message: 'Document not found' });
+      }
+    } catch (error) {
+      console.error('Error deleting document', error);
+      res.status(500).send('Internal Server Error');
+    }
+  });

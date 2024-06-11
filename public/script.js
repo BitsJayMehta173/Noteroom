@@ -83,6 +83,9 @@ function highlight(){
                     if(document.querySelector(".contdetails")){
                         document.querySelector(".contdetails").remove()
                     }
+                    if(document.querySelector(".deletefile")){
+                        document.querySelector(".deletefile").remove()
+                    }
                 }
             })
 
@@ -130,6 +133,9 @@ function highlight(){
                     if(document.querySelector(".contdetails")){
                         document.querySelector(".contdetails").remove()
                     }
+                    if(document.querySelector(".deletefile")){
+                        document.querySelector(".deletefile").remove()
+                    }
                         let detbox=document.querySelector(".detbox")
                         let contdetails=document.createElement("div")
                         contdetails.classList.toggle("contdetails")
@@ -139,6 +145,7 @@ function highlight(){
                         let det=document.createElement("div")
                         det.classList.toggle("det")
                         let dettext=document.createElement("span")
+                        dettext.classList.toggle("dettext")
                         dettext.textContent=ele["description"]
                         timestamp.innerHTML="Today"
                         det.classList.toggle("active")
@@ -147,11 +154,23 @@ function highlight(){
                         contdetails.appendChild(det)
                         detbox.appendChild(contdetails)
 
-
+                        let deletefile=document.createElement("button")
+                        deletefile.classList.toggle("deletefile")
+                        deletefile.innerHTML="X"
+                        let otherprops=document.querySelector(".otherprops")
+                        otherprops.appendChild(deletefile)
+                        if(document.querySelector(".deletefile")){
+                            let deletefile=document.querySelector(".deletefile")
+                            deletefile.onclick = function() {
+                                let idstore=document.querySelector(".idstore")
+                                console.log(idstore.textContent)
+                                deleteData(idstore.textContent) 
+                            };
+                        }
                 }
             })
-
         },false);
+
     });
     
     btncover.forEach(element => {
@@ -180,6 +199,9 @@ function highlight(){
                     if(document.querySelector(".contdetails")){
                         document.querySelector(".contdetails").remove()
                     }
+                    if(document.querySelector(".deletefile")){
+                        document.querySelector(".deletefile").remove()
+                    }
                         let detbox=document.querySelector(".detbox")
                         let contdetails=document.createElement("div")
                         contdetails.classList.toggle("contdetails")
@@ -189,6 +211,7 @@ function highlight(){
                         let det=document.createElement("div")
                         det.classList.toggle("det")
                         let dettext=document.createElement("span")
+                        dettext.classList.toggle("dettext")
                         dettext.textContent=ele["description"]
                         timestamp.innerHTML="Today"
                         det.classList.toggle("active")
@@ -196,14 +219,44 @@ function highlight(){
                         det.appendChild(dettext)
                         contdetails.appendChild(det)
                         detbox.appendChild(contdetails)
+
+                        let deletefile=document.createElement("button")
+                        deletefile.classList.toggle("deletefile")
+                        deletefile.innerHTML="X"
+                        let otherprops=document.querySelector(".otherprops")
+                        otherprops.appendChild(deletefile)
+                        if(document.querySelector(".deletefile")){
+                            let deletefile=document.querySelector(".deletefile")
+                            deletefile.onclick = function() {
+                                let idstore=document.querySelector(".idstore")
+                                console.log(idstore.textContent)
+                                deleteData(idstore.textContent)         
+                            };
+                        }
                 }
             })
+            ta.focus()
+
         },false);
     });
 
   
 
 }
+
+function deleteData(id) {
+    fetch(`http://localhost:3000/getUsers/${id}`, {
+        method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.message) {
+            location.reload();
+        }
+    })
+    .catch(error => console.error('Error deleting data:', error));
+}
+
 
 highlight()
 
@@ -249,9 +302,18 @@ async function nfnsubmitfun(){
                 openedfile.appendChild(btndiv)
                 newfiledialogue.style.display="none"
                 highlight()
-                idstore=document.querySelector(".idstore")
-                idstore.textContent=data["receivedData"]["_id"]
+                // idstore=document.querySelector(".idstore")
+                // idstore.textContent=data["receivedData"]["_id"]
 
+                const elements = document.querySelectorAll('.btncover');
+                const lastElement = elements.length ? elements[elements.length - 1] : null;
+
+                if (lastElement) {
+                lastElement.click();
+                ta.focus();
+                } else {
+                console.log('No elements found');
+                }
 
             })
             .catch(error => console.error('Error:', error));
@@ -303,3 +365,4 @@ ta.addEventListener("keyup", async function(){
     .catch(error => console.error('Update Error:', error));
 
 });
+
