@@ -8,14 +8,20 @@ Still in progress
 still in progress 
 custom online notepad
 
-Further Updates:
+Further Updates
 
-Word Recognition,
-Genre Recognition,
-Redundancy Elimination,,
-Proper Graph Connection for Story Mode to enable the relationship between Notes,
-Voice Recording (Specifically for idea mode or Reading Music Mode) :- Will Use S3 Bucket,
-Authentication
+1.Word Recognition
+
+2.Genre Recognition,
+
+3.Redundancy Elimination
+
+4.Proper Graph Connection for Story Mode to enable the relationship between Notes,
+
+5.Voice Recording (Specifically for idea mode or Reading Music Mode) :- Will Use S3 Bucket,
+
+6.Authentication
+
 
 
 Specifically For Online Authors Who Likes to Write Ideas and Short Stories
