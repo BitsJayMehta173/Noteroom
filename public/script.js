@@ -54,26 +54,26 @@ function fileload() {
       openedfile.appendChild(btndiv);
 
       highlight();
-      let detbox = document.querySelector(".detbox");
-      let contdetails = document.createElement("div");
-      contdetails.classList.toggle("contdetails");
-      // btndiv.setAttribute('id', data["receivedData"]["_id"]);
-      let timestamp = document.createElement("div");
-      timestamp.classList.toggle("timestamp");
-      let det = document.createElement("div");
-      det.classList.toggle("det");
-      let dettext = document.createElement("span");
-      dettext.classList.toggle("dettext");
-      dettext.textContent = element["title"];
-      timestamp.innerHTML = "Today";
-      if (idx == 0) {
-        det.classList.toggle("active");
-        idx += 1;
-      }
-      contdetails.appendChild(timestamp);
-      det.appendChild(dettext);
-      contdetails.appendChild(det);
-      detbox.appendChild(contdetails);
+    //   let detbox = document.querySelector(".detbox");
+    //   let contdetails = document.createElement("button");
+    //   contdetails.classList.toggle("contdetails");
+    //   // btndiv.setAttribute('id', data["receivedData"]["_id"]);
+    //   let timestamp = document.createElement("div");
+    //   timestamp.classList.toggle("timestamp");
+    //   let det = document.createElement("div");
+    //   det.classList.toggle("det");
+    //   let dettext = document.createElement("span");
+    //   dettext.classList.toggle("dettext");
+    //   dettext.textContent = element["title"];
+    //   timestamp.innerHTML = "Today";
+    //   if (idx == 0) {
+    //     det.classList.toggle("active");
+    //     idx += 1;
+    //   }
+    //   contdetails.appendChild(timestamp);
+    //   det.appendChild(dettext);
+    //   contdetails.appendChild(det);
+    //   detbox.appendChild(contdetails);
     });
   });
 }
@@ -125,28 +125,28 @@ function highlight() {
               e.remove();
             });
           }
-          contents.forEach((cele) => {
-            let detbox = document.querySelector(".detbox");
-            let contdetails = document.createElement("div");
-            contdetails.classList.toggle("contdetails");
-            // btndiv.setAttribute('id', data["receivedData"]["_id"]);
-            let timestamp = document.createElement("div");
-            timestamp.classList.toggle("timestamp");
-            let det = document.createElement("div");
-            det.classList.toggle("det");
-            let dettext = document.createElement("span");
-            dettext.classList.toggle("dettext");
-            dettext.textContent = cele["title"];
-            timestamp.innerHTML = "Today";
-            if (idx == 0) {
-              det.classList.toggle("active");
-              idx += 1;
-            }
-            contdetails.appendChild(timestamp);
-            det.appendChild(dettext);
-            contdetails.appendChild(det);
-            detbox.appendChild(contdetails);
-          });
+        //   contents.forEach((cele) => {
+        //     let detbox = document.querySelector(".detbox");
+        //     let contdetails = document.createElement("div");
+        //     contdetails.classList.toggle("contdetails");
+        //     // btndiv.setAttribute('id', data["receivedData"]["_id"]);
+        //     let timestamp = document.createElement("div");
+        //     timestamp.classList.toggle("timestamp");
+        //     let det = document.createElement("div");
+        //     det.classList.toggle("det");
+        //     let dettext = document.createElement("span");
+        //     dettext.classList.toggle("dettext");
+        //     dettext.textContent = cele["title"];
+        //     timestamp.innerHTML = "Today";
+        //     if (idx == 0) {
+        //       det.classList.toggle("active");
+        //       idx += 1;
+        //     }
+        //     contdetails.appendChild(timestamp);
+        //     det.appendChild(dettext);
+        //     contdetails.appendChild(det);
+        //     detbox.appendChild(contdetails);
+        //   });
         }
       },
       false
@@ -464,46 +464,79 @@ function searchItems() {
     // Get the value of the search input
     const searchValue = document.querySelector(".searchBox").value.toLowerCase();
     console.log(searchValue);
-  
+
     // Remove existing search results
-    if (document.querySelector(".contdetails")) {
-      document.querySelectorAll(".contdetails").forEach((e) => {
-        e.remove();
-      });
-    }
-  
+    const existingDetails = document.querySelectorAll(".contdetails");
+    existingDetails.forEach(e => e.remove());
+
     // Loop through the contents array and filter items based on the search value
     contents.forEach((cele) => {
-      const itemText = cele["title"].toLowerCase(); // Make sure the item text is lowercase for comparison
-  
-      if (itemText.includes(searchValue)) {
-        // Create a new div element for the search result
-        let detbox = document.querySelector(".detbox");
-        let contdetails = document.createElement("div");
-        contdetails.classList.add("contdetails");
-  
-        // Create a timestamp element
-        let timestamp = document.createElement("div");
-        timestamp.classList.add("timestamp");
-        timestamp.textContent = "Today";
-  
-        // Create a details element
-        let det = document.createElement("div");
-        det.classList.add("det");
-  
-        // Create a span element for the item text
-        let dettext = document.createElement("span");
-        dettext.classList.add("dettext");
-        dettext.textContent = cele["title"];
-  
-        // Append the timestamp and details text to the contdetails div
-        det.appendChild(dettext);
-        contdetails.appendChild(timestamp);
-        contdetails.appendChild(det);
-  
-        // Append the contdetails div to the detbox container
-        detbox.appendChild(contdetails);
-      }
+        const itemText = cele["title"].toLowerCase(); // Make sure the item text is lowercase for comparison
+
+        if (itemText.includes(searchValue)) {
+            // Create a new div element for the search result
+            let detbox = document.querySelector(".detbox");
+            let contdetails = document.createElement("div");
+            contdetails.classList.add("contdetails");
+
+            // Create a timestamp element
+            let timestamp = document.createElement("div");
+            timestamp.classList.add("timestamp");
+            timestamp.textContent = "Today";
+
+            // Create a button element
+            let det = document.createElement("button");
+            det.classList.add("det");
+
+            // Create a span element for the item text
+            let dettext = document.createElement("span");
+            dettext.classList.add("dettext");
+            dettext.textContent = cele["title"];
+
+            // Append the timestamp and details text to the button
+            det.appendChild(dettext);
+            contdetails.appendChild(timestamp);
+            contdetails.appendChild(det);
+            
+            // Append the contdetails div to the detbox container
+            detbox.appendChild(contdetails);
+
+            // Add click event to the button
+            det.addEventListener("click", () => {
+                const fnameElements = document.querySelectorAll(".fname");
+                let found = false; // Flag to check if the click event was triggered
+
+                fnameElements.forEach((fname) => {
+                    if (fname.textContent === dettext.textContent) {
+                        fname.click(); // Trigger the click event on the matching .fname element
+                        found = true; // Set the flag to true
+
+                        // Scroll the selected .fname element's parent container to its end
+                        setTimeout(() => {
+                            const openedFileContainer = document.querySelector(".openedfile");
+                            if (openedFileContainer) {
+                                const activeFileElement = Array.from(openedFileContainer.querySelectorAll(".fname"))
+                                    .find(element => element.textContent === dettext.textContent);
+
+                                if (activeFileElement) {
+                                    const parentElement = activeFileElement.parentElement;
+
+                                    // Scroll the parent element to the end so the fname is visible at the bottom
+                                    parentElement.scrollIntoView({
+                                        behavior: "smooth",
+                                        block: "end" // Align the element to the end of the container
+                                    });
+                                }
+                            }
+                        }, 0); // Ensure this runs after the click event
+                    }
+                });
+
+                // Optionally handle the case where no matching .fname element was found
+                if (!found) {
+                    console.log("No matching .fname element found.");
+                }
+            });
+        }
     });
-  }
-  
+}
