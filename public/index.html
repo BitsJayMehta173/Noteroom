@@ -11,7 +11,13 @@
       <div class="detailsbox">
         <h1>File Name</h1>
         <input class="nfn" type="text" />
-        <button class="nfnsubmit" onclick="nfnsubmitfun()">Submit</button>
+        <div class="st">
+          <button class="nfnsubmit" onclick="nfnsubmitfun()">Submit</button>
+          
+        </div>
+        <div class="sti">
+        <button class="nfnsubmit" onclick="nfnclosefun()">Close</button>
+        </div>
       </div>
     </div>
     <div class="sidebar">
@@ -26,6 +32,9 @@
             <button>$</button>
           </div>
         </div>
+      <div class="search">
+        <input type="text" class="searchBox" placeholder="Search items..." onkeyup="searchItems()">
+      </div>
         <div class="detbox">
           <!-- For Individual File Sepearate History For Overall File Changes Seperate  -->
             <!-- <div class="contdetails">
